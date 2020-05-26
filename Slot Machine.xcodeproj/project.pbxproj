@@ -24,6 +24,7 @@
 		F8DA4EF2247DA2FD00F0F29E /* LogoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DA4EF1247DA2FD00F0F29E /* LogoView.swift */; };
 		F8DA4EF4247DA36000F0F29E /* Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DA4EF3247DA36000F0F29E /* Modifiers.swift */; };
 		F8DA4EF6247DA79C00F0F29E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DA4EF5247DA79C00F0F29E /* Extensions.swift */; };
+		F8DA4EF8247DB2FF00F0F29E /* ReelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DA4EF7247DB2FF00F0F29E /* ReelView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		F8DA4EF1247DA2FD00F0F29E /* LogoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoView.swift; sourceTree = "<group>"; };
 		F8DA4EF3247DA36000F0F29E /* Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifiers.swift; sourceTree = "<group>"; };
 		F8DA4EF5247DA79C00F0F29E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F8DA4EF7247DB2FF00F0F29E /* ReelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			children = (
 				F80A7D2B247D9BDD003A61BC /* ContentView.swift */,
 				F8DA4EF1247DA2FD00F0F29E /* LogoView.swift */,
+				F8DA4EF7247DB2FF00F0F29E /* ReelView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				F8DA4EF6247DA79C00F0F29E /* Extensions.swift in Sources */,
 				F8DA4EF2247DA2FD00F0F29E /* LogoView.swift in Sources */,
 				F80A7D2A247D9BDD003A61BC /* SceneDelegate.swift in Sources */,
+				F8DA4EF8247DB2FF00F0F29E /* ReelView.swift in Sources */,
 				F80A7D2C247D9BDD003A61BC /* ContentView.swift in Sources */,
 				F8DA4EF4247DA36000F0F29E /* Modifiers.swift in Sources */,
 			);
