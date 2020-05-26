@@ -108,6 +108,47 @@ struct ContentView: View {
                 
                 // MARK: Footer
                 Spacer()
+                HStack {
+                    // MAKR: - BET 20
+                    HStack(alignment: .center
+                    , spacing: 10) {
+                        Button(action: {
+                            print("Bet 20 coins")
+                        }) {
+                            Text("20")
+                                .fontWeight(.heavy)
+                                .foregroundColor(Color.white)
+                                .modifier(BetNumberModifier())
+                        }
+                            // Adding aspect modifier
+                            .modifier(BetCapsuleModifier())
+                        
+                        Image("gfx-casino-chips")
+                            .resizable()
+                            .opacity(0)
+                            .modifier(CasinoChipsModifier())
+                    }
+                    
+                    // MAKR: - BET 10
+                    HStack(alignment: .center
+                    , spacing: 10) {
+                        Image("gfx-casino-chips")
+                            .resizable()
+                            .opacity(1)
+                            .modifier(CasinoChipsModifier())
+                        // Second Button
+                        Button(action: {
+                            print("Bet 10 coins")
+                        }) {
+                            Text("10")
+                                .fontWeight(.heavy)
+                                .foregroundColor(Color.yellow)
+                                .modifier(BetNumberModifier())
+                        }
+                            // Adding aspect modifier
+                            .modifier(BetCapsuleModifier())
+                    }
+                }
             }
                 // MARK: Buttons
                 .overlay(
