@@ -8,21 +8,78 @@
 
 import SwiftUI
 
-// MAKR: PROPERTIES
-
 struct ContentView: View {
+    
+    // Images array
+    let symbols = ["gfx-bell", "gfx-cherry", "gfx-coin", "gfx-grape", "gfx-seven", "gfx-strawberry"]
     
     // MARK: - Properties
     @State private var showingInfoView: Bool = false
+    @State private var reels: Array = [0, 1, 2]
+    @State private var highscore: Int = 0
+    @State private var coins: Int = 100
+    @State private var betAmount: Int = 10
+    @State private var isActiveBet10: Bool = true
+    @State private var isActiveBet20: Bool = false
+    
+    // MARK: - Functions
+    
+    // Spin the reels
+    func spinReels() {
+        reels = reels.map({ _ in
+            Int.random(in: 0...symbols.count - 1)
+        })
+    }
+    
+    // Check the wining
+    func checkWining() {
+        if reels[0] == reels[1] && reels[1] == reels[2] && reels[0] == reels[2] {
+            // Player Wins
+            playerWins()
+            // New HighScore
+            if coins > highscore {
+                newHighScore()
+            }
+        } else {
+            // Player loses!
+            playerLoses()
+        }
+    }
+    
+    func playerWins() {
+        coins += betAmount * 10
+    }
+    
+    func newHighScore() {
+        highscore = coins
+    }
+    
+    func playerLoses() {
+        coins -= betAmount
+    }
+    
+    func activateBet20() {
+        betAmount = 20
+        isActiveBet20 = true
+        isActiveBet10 = false
+    }
+    
+    func activateBet10() {
+        betAmount = 10
+        isActiveBet10 = true
+        isActiveBet20 = false
+    }
+    
+    // Game is Over
     
     // MARK: BODY
     var body: some View {
         ZStack {
-            // MARK: Background
+            // MARK: - Background
             LinearGradient(gradient: Gradient(colors: [Color("ColorPink"), Color("ColorPurple")]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
             
-            // MAKR: Interface
+            // MAKR: - Interface
             
             VStack(alignment: .center, spacing: 5) {
                 
@@ -31,16 +88,14 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                // MARK: Score
+                // MARK: - Score
                 HStack {
                     HStack {
-                        Text("Your\nCoins".uppercased())
-                            // Adding reuzable code
+                        Text("Your\ncoins")
                             .scoreLabelStyle()
                             .multilineTextAlignment(.trailing)
                         
-                        Text("100")
-                            // Adding reuzable code
+                        Text("\(coins)")
                             .scoreNumberStyle()
                             .modifier(ScoreNumberModifier())
                     }
@@ -66,40 +121,47 @@ struct ContentView: View {
                         .modifier(ScoreContainerModifier())
                 }
                 
-                // MARK: Slot Machine
+                // MARK: - Slot Machine
                 VStack(alignment: .center, spacing: 0) {
+                    
                     // MARK: - REEL #1
                     ZStack {
                         ReelView()
-                        Image("gfx-bell")
+                        Image(symbols[reels[0]])
                             .resizable()
                             .modifier(ImageModifier())
                     }
                     
                     HStack(alignment: .center, spacing: 0) {
-                        // MARK: REEL #2
+                        
+                        // MARK: - REEL #2
                         ZStack {
                             ReelView()
-                            Image("gfx-seven")
+                            Image(symbols[reels[1]])
                                 .resizable()
                                 .modifier(ImageModifier())
                         }
                         
                         Spacer()
                         
-                        // MARK: REEL # 3
+                        // MARK: - REEL # 3
                         ZStack {
                             ReelView()
-                            Image("gfx-cherry")
+                            Image(symbols[reels[2]])
                                 .resizable()
                                 .modifier(ImageModifier())
                         }
                     }
                     .frame(maxWidth: 500)
                     
-                    // MARK: Spin Button
+                    // MARK: - Spin Button
                     Button(action: {
-                        print("Spin the reels")
+                        // random data
+                        self.spinReels()
+                        
+                        // Check Wining
+                        self.checkWining()
+                        
                     }) {
                         Image("gfx-spin")
                             .renderingMode(.original)
@@ -109,18 +171,18 @@ struct ContentView: View {
                 }
                 .layoutPriority(2)
                 
-                // MARK: Footer
+                // MARK: - Footer
                 Spacer()
                 HStack {
-                    // MAKR: - BET 20
+                    // MARK: - BET 20
                     HStack(alignment: .center
                     , spacing: 10) {
                         Button(action: {
-                            print("Bet 20 coins")
+                            self.activateBet20()
                         }) {
                             Text("20")
                                 .fontWeight(.heavy)
-                                .foregroundColor(Color.white)
+                                .foregroundColor(isActiveBet20 ? Color("ColorYellow") : Color.white)
                                 .modifier(BetNumberModifier())
                         }
                             // Adding aspect modifier
@@ -128,24 +190,24 @@ struct ContentView: View {
                         
                         Image("gfx-casino-chips")
                             .resizable()
-                            .opacity(0)
+                            .opacity(isActiveBet20 ? 1 : 0)
                             .modifier(CasinoChipsModifier())
                     }
                     
-                    // MAKR: - BET 10
+                    // MARK: - BET 10
                     HStack(alignment: .center
                     , spacing: 10) {
                         Image("gfx-casino-chips")
                             .resizable()
-                            .opacity(1)
+                            .opacity(isActiveBet10 ? 1 : 0)
                             .modifier(CasinoChipsModifier())
                         // Second Button
                         Button(action: {
-                            print("Bet 10 coins")
+                            self.activateBet10()
                         }) {
                             Text("10")
                                 .fontWeight(.heavy)
-                                .foregroundColor(Color.yellow)
+                                .foregroundColor(isActiveBet10 ? Color("ColorYellow") : Color.white)
                                 .modifier(BetNumberModifier())
                         }
                             // Adding aspect modifier
@@ -153,7 +215,7 @@ struct ContentView: View {
                     }
                 }
             }
-                // MARK: Buttons
+                // MARK: - Buttons
                 .overlay(
                     // RESET
                     Button(action: {
@@ -175,7 +237,7 @@ struct ContentView: View {
                 .padding()
                 .frame(maxWidth: 720)
             
-            // MARK: PopUp
+            // MARK: - PopUp
         }
         .sheet(isPresented: $showingInfoView) {
             InfoView()
@@ -183,7 +245,7 @@ struct ContentView: View {
     }
 }
 
-// MARK: PREVIEW
+// MARK: - PREVIEW
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
