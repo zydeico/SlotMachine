@@ -9,6 +9,10 @@ Clone the repository and open
 ```
 Slot Machine.xcodeproj
 ```
+## Buy SwiftUIMasterclass course
+The best SwiftUI course on sale, visit the site:
+[SwiftUiMasterclass.com](http://swiftuimasterclass.com)
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 ## License
