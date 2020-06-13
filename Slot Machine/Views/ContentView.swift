@@ -36,7 +36,8 @@ struct ContentView: View {
         haptics.notificationOccurred(.success)
     }
     
-    // Check the wining
+    // MARK: - Check if user win
+    
     func checkWining() {
         if reels[0] == reels[1] && reels[1] == reels[2] && reels[0] == reels[2] {
             // Player Wins
@@ -53,10 +54,12 @@ struct ContentView: View {
         }
     }
     
+    // MARK: - Player Wins
     func playerWins() {
         coins += betAmount * 10
     }
     
+    // MARK: - NewHighscore
     func newHighScore() {
         highscore = coins
         // Adding functionality for save the data locally
@@ -64,10 +67,12 @@ struct ContentView: View {
         playSound(sound: "high-score", type: "mp3")
     }
     
+    // MARK: - Player Loses
     func playerLoses() {
         coins -= betAmount
     }
     
+    // MARK: - ActivateBeta20
     func activateBet20() {
         betAmount = 20
         isActiveBet20 = true
@@ -76,6 +81,7 @@ struct ContentView: View {
         haptics.notificationOccurred(.success)
     }
     
+    // MARK: - ActivateBeta10
     func activateBet10() {
         betAmount = 10
         isActiveBet10 = true
@@ -92,6 +98,7 @@ struct ContentView: View {
         }
     }
     
+    // MARK: - Reset Game
     func resetGame() {
         UserDefaults.standard.set(0, forKey: "HighScore")
         highscore = 0
@@ -99,9 +106,7 @@ struct ContentView: View {
         activateBet10()
         playSound(sound: "chimeup", type: "mp3")
     }
-    
-    // Game is Over
-    
+        
     // MARK: BODY
     var body: some View {
         ZStack {
@@ -109,7 +114,7 @@ struct ContentView: View {
             LinearGradient(gradient: Gradient(colors: [Color("ColorPink"), Color("ColorPurple")]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
             
-            // MAKR: - Interface
+            // MARK: - Interface
             
             VStack(alignment: .center, spacing: 5) {
                 
@@ -169,6 +174,7 @@ struct ContentView: View {
                             })
                     }
                     
+                    // MARK: - REELS
                     HStack(alignment: .center, spacing: 0) {
                         
                         // MARK: - REEL #2
