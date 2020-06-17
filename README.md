@@ -13,7 +13,7 @@ Slot Machine.xcodeproj
 The best SwiftUI course on sale, visit the site:
 [SwiftUiMasterclass.com](http://swiftuimasterclass.com)
 
-## Check the YoutTube video here 
+## Check the YouTube video here 
 [Slot machine time lapse](https://youtu.be/mAqVlkvRCek)
 
 ## Contributing
